@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import {
-  SafeAreaView,
+  FlatList,
+  Pressable,
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from 'react-native';
 
@@ -48,19 +50,50 @@ function App(): React.JSX.Element {
   }
   
   return (
-    <SafeAreaView>
+    <>
       <StatusBar />
-      <View>
-        <Text>1</Text>
+      <View style={styles.container}>
+        <View style={styles.topContainer}>
+          <View style={styles.euroContainer}>
+            <Text style={styles.euro}>€</Text>
+            <TextInput 
+              maxLength={16}
+              value={inputValue}
+              clearButtonMode='always' // only for iOS
+              onChangeText={setInputValue}
+              keyboardType='number-pad'
+              placeholder='Enter amount in euro'
+              style={styles.inputAmountField}
+            />
+          </View>
+          {resultValue !== '' && (
+              <Text style={styles.resultTxt}>{resultValue}</Text>
+            )}
+        </View>
+        <View style={styles.bottomContainer}>
+          <FlatList 
+            numColumns={3}
+            data={currencies}
+            keyExtractor={item => item.name}
+            renderItem={({item}) => (
+              <Pressable 
+                style={[styles.button, targetCurrency === item.name && styles.selected]}
+                onPress={() => buttonPressed(item)}
+              >
+                <CurrencyButton {...item} />
+              </Pressable>
+            )}
+          />
+        </View>
       </View>
-    </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#515151',
+    backgroundColor: '#242B2E',
   },
   topContainer: {
     flex: 1,
@@ -69,17 +102,16 @@ const styles = StyleSheet.create({
   },
   resultTxt: {
     fontSize: 32,
-    color: '#000000',
+    color: '#CAD5E2',
     fontWeight: '800',
   },
-  rupee: {
+  euro: {
     marginRight: 8,
-
     fontSize: 22,
-    color: '#000000',
+    color: '#CAD5E2',
     fontWeight: '800',
   },
-  rupeesContainer: {
+  euroContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -90,16 +122,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     backgroundColor: '#FFFFFF',
+    color: '#0D0D0D',
+    fontSize: 16
   },
   bottomContainer: {
     flex: 3,
   },
   button: {
     flex: 1,
-
     margin: 12,
     height: 60,
-
     borderRadius: 12,
     backgroundColor: '#fff',
     elevation: 2,

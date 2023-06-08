@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
 type CurrecyButtonProps = PropsWithChildren<{
-    country: string;
+    name: string;
     flag: string;
 }>
 
@@ -12,7 +12,7 @@ const CurrencyButton = (props: CurrecyButtonProps) : React.JSX.Element => {
     return (
         <View style={styles.buttonContainer}>
             <Text style={styles.buttonFlag}>{props.flag}</Text>
-            <Text style={styles.buttonCountry}>{props.country}</Text>
+            <Text style={styles.buttonCountry}>{props.name}</Text>
         </View>
     )
 }
