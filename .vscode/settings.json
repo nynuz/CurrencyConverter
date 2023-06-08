@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "nynuz_github",
+        "projectKey": "nynuz_CurrencyConverter"
+    }
+}
