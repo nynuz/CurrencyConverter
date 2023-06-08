@@ -7,7 +7,7 @@ type CurrecyButtonProps = PropsWithChildren<{
     flag: string;
 }>
 
-const CurrencyButton = (props: CurrecyButtonProps) => {
+const CurrencyButton = (props: CurrecyButtonProps) : React.JSX.Element => {
 
     return (
         <View style={styles.buttonContainer}>
